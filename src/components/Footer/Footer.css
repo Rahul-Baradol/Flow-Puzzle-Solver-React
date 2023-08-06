@@ -1,0 +1,15 @@
+footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    color: whitesmoke;
+    background-color: #1a76fe;
+    bottom: 0vh;
+    height: 6vh;
+    font-size: 0.85em;
+}
+
+#p2 {
+    margin-left: auto;
+}

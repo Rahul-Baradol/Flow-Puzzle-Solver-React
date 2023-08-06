@@ -1,0 +1,35 @@
+.customContainer {
+    height: 60vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4vh;
+    color: #0d6efd;
+}
+
+.customBtns {
+    height: 15vh;
+    width: 20vw;
+    font-size: 120%;
+    margin: 0 1vw;
+}
+
+.top {
+    position: absolute;
+    top: 16vh;
+    display: flex;
+    justify-content: center;
+}
+
+.bottom {
+    position: absolute;
+    top: 40vh;
+    display: flex;
+    justify-content: center;
+}
+
+#message {
+    position: absolute;
+    top: 1vh;
+}
