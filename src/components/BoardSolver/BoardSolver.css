@@ -1,0 +1,62 @@
+.board {
+    position: relative;
+    margin: auto;
+    margin-top: 3vh;
+    display: grid;
+    width: 60vw;
+    height: 60vh;
+    border: 2px solid rgb(43, 43, 255);   
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+/* The color options available */
+.options {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 25vh;
+    width: 8vw;
+    margin-left: 10vw;
+    margin-top: 2.5vh;
+}
+
+.option {
+    margin: 0.5vh 0;
+}
+
+/* Grid size with React state */
+#four {
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+}
+
+#five {
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+}
+
+#six {
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+}
+
+#seven {
+    grid-template-rows: repeat(7, 1fr);
+    grid-template-columns: repeat(7, 1fr);
+}
+
+#eight {
+    grid-template-rows: repeat(8, 1fr);
+    grid-template-columns: repeat(8, 1fr);
+}
+
+#nine {
+    grid-template-rows: repeat(9, 1fr);
+    grid-template-columns: repeat(9, 1fr);
+}
