@@ -30,6 +30,23 @@
     margin: 0.5vh 0;
 }
 
+/* Solve */
+#solve {
+    position: absolute;
+    margin-top: 74.5vh;
+    margin-left: 43vw;
+    width: 10vw;
+    height: 8vh;
+}
+
+#clear {
+    position: absolute;
+    margin-top: 74.5vh;
+    margin-left: 55vw;
+    width: 10vw;
+    height: 8vh;
+}
+
 /* Grid size with React state */
 #four {
     grid-template-rows: repeat(4, 1fr);
