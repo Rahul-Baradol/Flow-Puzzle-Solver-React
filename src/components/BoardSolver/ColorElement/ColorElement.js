@@ -8,7 +8,7 @@ export default function ColorElement(props) {
         setActiveColor(props.solutionColor);
     }
 
-    if (clearVal != props.mainClear) {
+    if (clearVal !== props.mainClear) {
         setClearVal(props.mainClear);
         setActiveColor("white");
     }
