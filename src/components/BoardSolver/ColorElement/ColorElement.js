@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './ColorElement.css'
 
 export default function ColorElement(props) {
     const [activeColor, setActiveColor] = useState("white");
@@ -18,7 +19,6 @@ export default function ColorElement(props) {
 
     let style = {
         backgroundColor: activeColor,
-        border: "1px solid black"
     };
 
     return (
@@ -42,7 +42,7 @@ export default function ColorElement(props) {
                 props.setFreqOfColor(freqOfColor);
                 props.setCoord(coord)
             }
-        }} style={style}>
+        }} style={style} id="colorElement">
             
         </div>
     )

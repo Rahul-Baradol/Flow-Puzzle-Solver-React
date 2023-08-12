@@ -1,50 +1,166 @@
-.board {
-    position: relative;
-    margin: auto;
-    margin-top: 3vh;
-    display: grid;
-    width: 60vw;
-    height: 60vh;
-    border: 2px solid rgb(43, 43, 255);   
-}
-
 .main {
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-}
-
-/* The color options available */
-.options {
-    position: absolute;
-    display: flex;
     flex-direction: column;
-    height: 25vh;
-    width: 8vw;
-    margin-left: 10vw;
-    margin-top: 2.5vh;
+    width: 100vw;
+    height: 90vh;
 }
 
-.option {
-    margin: 0.5vh 0;
+/* Puzzle Board */
+.board {
+    display: grid;
+    grid-gap: 1vh;
+    position: relative;
+    margin: -50vh auto;
+    width: 60vw;
+    height: 60vh;
+    padding: 1.2vh 1.2vw;
+    border: 2px solid rgb(43, 43, 255);   
 }
 
 /* Solve */
 #solve {
-    position: absolute;
-    margin-top: 74.5vh;
-    margin-left: 43vw;
+    position: relative;
     width: 10vw;
     height: 8vh;
+    margin: 14vh 38vw;
+    font-size: 1rem;
 }
 
+/* Clear */
 #clear {
-    position: absolute;
-    margin-top: 74.5vh;
-    margin-left: 55vw;
+    position: relative;
     width: 10vw;
     height: 8vh;
+    margin: -22vh 50vw;
+    font-size: 1rem;
+}
+
+/* The color options */
+.options {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 46vh;
+    width: 4vw;
+    margin: 4vh 15vw;
+}
+
+.option {
+    height: 4vh;
+    width: 2vw;
+    border-radius: 100%;
+    margin-top: 1vh;
+    transition: background-color .15s ease-in-out, border-color .15s ease-in-out;
+    cursor: pointer;
+}
+
+#redLabel {
+    border: 1.5px solid red;
+}
+
+#redLabel:active {
+    background-color: red;
+}
+
+#redLabel:hover {
+    background-color: red;
+}
+
+#yellowLabel {
+    border: 2px solid yellow;
+}
+
+#yellowLabel:active {
+    background-color: yellow;
+}
+
+#yellowLabel:hover {
+    background-color: yellow;
+}
+
+#blueLabel {
+    border: 1.5px solid blue;
+}
+
+#blueLabel:active {
+    background-color: blue;
+}
+
+#blueLabel:hover {
+    background-color: blue;
+}
+
+#greenLabel {
+    border: 1.5px solid green;
+}
+
+#greenLabel:active {
+    background-color: green;
+}
+
+#greenLabel:hover {
+    background-color: green;
+}
+
+#orangeLabel {
+    border: 2px solid orange;
+}
+
+#orangeLabel:active {
+    background-color: orange;
+}
+
+#orangeLabel:hover {
+    background-color: orange;
+}
+
+#cyanLabel {
+    border: 2px solid cyan;
+}
+
+#cyanLabel:active {
+    background-color: cyan;
+}
+
+#cyanLabel:hover {
+    background-color: cyan;
+}
+
+#pinkLabel {
+    border: 2px solid rgb(249, 157, 172);
+}
+
+#pinkLabel:active {
+    background-color: rgb(249, 157, 172);
+}
+
+#pinkLabel:hover {
+    background-color: rgb(249, 157, 172);
+}
+
+#lightgreenLabel {
+    border: 2px solid lightgreen;
+}
+
+#lightgreenLabel:active {
+    background-color: lightgreen;
+}
+
+#lightgreenLabel:hover {
+    background-color: lightgreen;
+}
+
+#lightblueLabel {
+    border: 2px solid lightblue;
+}
+
+#lightblueLabel:active {
+    background-color: lightblue;
+}
+
+#lightblueLabel:hover {
+    background-color: lightblue;
 }
 
 /* Grid size with React state */

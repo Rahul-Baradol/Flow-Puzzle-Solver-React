@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './BoardSolver.css'
 import ColorElement from './ColorElement/ColorElement';
+import AlertMessage from './AlertMessage/AlertMessage'
 
 export default function BoardSolver(props) {
   let size = props.boardSize;
@@ -20,7 +21,11 @@ export default function BoardSolver(props) {
         ["yellow", 0],
         ["blue", 0],
         ["green", 0],
-        ["orange", 0]
+        ["orange", 0],
+        ["cyan", 0],
+        ["pink", 0],
+        ["lightgreen", 0],
+        ["lightblue", 0]
     ]));
   
     // Coordinates of the colors present on the puzzle grid
@@ -30,7 +35,11 @@ export default function BoardSolver(props) {
       ["yellow", []],
       ["blue", []],
       ["green", []],
-      ["orange", []]
+      ["orange", []],
+      ["cyan", []],
+      ["pink", []],
+      ["lightgreen", []],
+      ["lightblue", []]
     ]))
 
     if (val === "unknown") {
@@ -43,6 +52,9 @@ export default function BoardSolver(props) {
   
     // Main clear state
     const [mainClear, setMainClear] = useState(0);
+
+    // Disable Solve Button
+    const [disableSolve, setDisableSolve] = useState(0);
 
   // ----------------------------------------------- Puzzle Solver ----------------------------------------------- //
   let n = size;
@@ -66,37 +78,35 @@ export default function BoardSolver(props) {
               [0, 0, 0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0, 0, 0]];
+
   let colorX = [[] , [], [], [], [], [], [], [], [] , [], [], [], [], [], [], [], [] , [], [], [], [], [], [], [], [], []]
   let colorY = [[] , [], [], [], [], [], [], [], [] , [], [], [], [], [], [], [], [] , [], [], [], [], [], [], [], [], []]
   let colorsAccToFreeMoves = [];
 
-  // if (color === "blue") colorCode = 1;
-  //       if (color === "green") colorCode = 6;
-  //       if (color === "orange") colorCode = 14;
-  //       if (color === "pink") colorCode = 15;
-  //       if (color === "red") colorCode = 17;
-  //       if (color === "violet") colorCode = 21;
-  //       if (color === "yellow") colorCode = 24;
   let colorCodeToColor = new Map([
-    [1, "blue"],
-    [6, "green"],
-    [14, "orange"],
-    [15, "pink"],
-    [17, "red"],
-    [21, "violet"],
-    [24, "yellow"],
-    [-1, "white"] 
+    [0, "white"],
+    [1, "red"],
+    [2, "yellow"],
+    [3, "blue"],
+    [4, "green"],
+    [5, "orange"],
+    [6, "cyan"],
+    [7, "pink"],
+    [8, "lightgreen"],
+    [9, "lightblue"]
   ]);
 
   let colorToColorCode = new Map([
-    ["blue", 1],
-    ["green", 6],
-    ["orange", 14],
-    ["pink", 15],
-    ["red", 17],
-    ["violet", 21],
-    ["yellow", 24],
-    ["white", -1] 
+    ["white", 0],
+    ["red", 1],
+    ["yellow", 2],
+    ["blue", 3],
+    ["green", 4],
+    ["orange", 5],
+    ["cyan", 6],
+    ["pink", 7],
+    ["lightgreen", 8],
+    ["lightblue", 9]
   ]);
 
   let solved = false;
@@ -253,33 +263,53 @@ export default function BoardSolver(props) {
   return (
     <>
     <div className="main">
+      <AlertMessage alert={props.alert}></AlertMessage>
       <div className="options">
-        <input onClick={()=> setCurrentColor("red")} type="radio" className="btn-check" name="btnradio" id="btnradio1" autoComplete="off" defaultChecked/>
-        <label className="btn btn-outline-primary option" htmlFor="btnradio1">Red</label>
+        <input onClick={()=> setCurrentColor("red")} type="radio" className="btn-check" name="btnradio" id="red" autoComplete="off" defaultChecked/>
+        <label id="redLabel" className="option" htmlFor="red"></label>
 
-        <input onClick={()=> setCurrentColor("yellow")} type="radio" className="btn-check" name="btnradio" id="btnradio2" autoComplete="off"/>
-        <label className="btn btn-outline-primary option" htmlFor="btnradio2">Yellow</label>
+        <input onClick={()=> setCurrentColor("yellow")} type="radio" className="btn-check" name="btnradio" id="yellow" autoComplete="off"/>
+        <label id="yellowLabel" className="option" htmlFor="yellow"></label>
 
-        <input onClick={()=> setCurrentColor("blue")} type="radio" className="btn-check" name="btnradio" id="btnradio3" autoComplete="off"/>
-        <label className="btn btn-outline-primary option" htmlFor="btnradio3">Blue</label>
+        <input onClick={()=> setCurrentColor("blue")} type="radio" className="btn-check" name="btnradio" id="blue" autoComplete="off"/>
+        <label id="blueLabel" className="option" htmlFor="blue"></label>
 
-        <input onClick={()=> setCurrentColor("green")} type="radio" className="btn-check" name="btnradio" id="btnradio4" autoComplete="off"/>
-        <label className="btn btn-outline-primary option" htmlFor="btnradio4">Green</label>
+        <input onClick={()=> setCurrentColor("green")} type="radio" className="btn-check" name="btnradio" id="green" autoComplete="off"/>
+        <label id="greenLabel" className="option" htmlFor="green"></label>
 
-        <input onClick={()=> setCurrentColor("orange")} type="radio" className="btn-check" name="btnradio" id="btnradio5" autoComplete="off"/>
-        <label className="btn btn-outline-primary option" htmlFor="btnradio5">Orange</label>
+        <input onClick={()=> setCurrentColor("orange")} type="radio" className="btn-check" name="btnradio" id="orange" autoComplete="off"/>
+        <label id="orangeLabel" className="option" htmlFor="orange"></label>
+
+        <input onClick={()=> setCurrentColor("cyan")} type="radio" className="btn-check" name="btnradio" id="cyan" autoComplete="off"/>
+        <label id="cyanLabel" className="option" htmlFor="cyan"></label>
+
+        <input onClick={()=> setCurrentColor("pink")} type="radio" className="btn-check" name="btnradio" id="pink" autoComplete="off"/>
+        <label id="pinkLabel" className="option" htmlFor="pink"></label>
+
+        <input onClick={()=> setCurrentColor("lightgreen")} type="radio" className="btn-check" name="btnradio" id="lightgreen" autoComplete="off"/>
+        <label id="lightgreenLabel" className="option" htmlFor="lightgreen"></label>
+
+        <input onClick={()=> setCurrentColor("lightblue")} type="radio" className="btn-check" name="btnradio" id="lightblue" autoComplete="off"/>
+        <label id="lightblueLabel" className="option" htmlFor="lightblue"></label>
       </div>
       
-      <button onClick={() =>{
+      <button id="solve" type="button" disabled={disableSolve} className="btn btn-outline-primary" onClick={() =>{
         let solve = true;
+        let count = 0;
+        setDisableSolve(1);
+
         coord.forEach((coordinateId, color) => {
           if (coordinateId.length % 2) {
             solve = false;
           }
+          count += coordinateId.length;
         });
 
-        if (solve) {
-          main();  
+        if (solve && count) {
+          // Starts solving the puzzle
+          main();
+
+          // Shows the puzzle to the user if exists
           let solutionTmp = [];
           for (let i = 0; i < n; i++) {
             for (let j = 0; j < m; j++) {
@@ -287,30 +317,70 @@ export default function BoardSolver(props) {
             }
           }
 
+          props.showAlert(
+            solved ? "Puzzle is solved as follows!" : "Could not find the solution to the given puzzle",
+            solved ? "success" : "primary",
+            1  
+          );
+          
           setSolutionGrid(solutionTmp);
         } else {
+          props.showAlert(
+            "Enter valid color configuration",
+            "warning",
+            1
+          );
           console.log("Enter valid coordinates.");
         }
-      }} id="solve" type="button" className="btn btn-outline-primary">Solve!!</button>
+      }}>Solve!!</button>
 
-        <button onClick={() =>{
-            setSolutionGrid(Array(81).fill("undef"));
-            setCoord(new Map([
-              ["red", []],
-              ["yellow", []],
-              ["blue", []],
-              ["green", []],
-              ["orange", []]
-            ]));
-            setFreqOfColor(new Map([
-              ["red", 0],
-              ["yellow", 0],
-              ["blue", 0],
-              ["green", 0],
-              ["orange", 0]
+      <button id="clear" type="button" className="btn btn-outline-primary" onClick={() =>{
+          setDisableSolve(0);
+          setSolutionGrid(Array(81).fill("undef"));
+          setCoord(new Map([
+            ["red", []],
+            ["yellow", []],
+            ["blue", []],
+            ["green", []],
+            ["orange", []],
+            ["cyan", []],
+            ["pink", []],
+            ["lightgreen", []],
+            ["lightblue", []]
           ]));
-            setMainClear(mainClear ^ 1);
-        }} id="clear" type="button" className="btn btn-outline-primary">Clear</button>
+          setFreqOfColor(new Map([
+            ["red", 0],
+            ["yellow", 0],
+            ["blue", 0],
+            ["green", 0],
+            ["orange", 0],
+            ["cyan", 0],
+            ["pink", 0],
+            ["lightgreen", 0],
+            ["lightblue", 0]
+        ]));
+        setMainClear(mainClear ^ 1);
+        
+        grid =  [[-1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1]];
+              
+        vis =   [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0]];
+      }} >Clear</button>
 
       <div id={val} className="board">
         <ColorElement id={0}  mainClear={mainClear}   solutionColor={solutionGrid[0]} coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>

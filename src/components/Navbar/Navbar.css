@@ -1,3 +1,15 @@
 #about {
     margin-left: auto;
 }
+
+#customNav {
+    height: 7.4vh;
+}
+
+#heading {
+    font-size: 1em;
+}
+
+#about {
+    font-size: 1em;
+}
