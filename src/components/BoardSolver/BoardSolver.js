@@ -78,6 +78,41 @@ export default function BoardSolver(props) {
               [0, 0, 0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0, 0, 0]];
+  
+  let parent = []
+  
+  // Disjoint Set/ Union Find/ Merge Set -> Start
+  function intializeDisjointSet(countOfNodes) {
+    parent = [];
+    for (let i = 0; i <= countOfNodes; i++) {
+      parent.push(i);
+    }
+  }
+
+  function findParent(node) {
+    let ultimateParent = node;
+    
+    // Finding the ultimate parent
+    while (parent[ultimateParent] !== ultimateParent) {
+      ultimateParent = parent[ultimateParent];
+    }
+
+    // Path compression
+    while (parent[node] !== node) {
+      let previousNode = parent[node];
+      parent[node] = ultimateParent;
+      node = previousNode;
+    }
+
+    return ultimateParent;
+  }
+
+  function Union(x, y) {
+    let px = findParent(x);
+    let py = findParent(y);
+    parent[px] = parent[py];
+  }
+  // Disjoint Set/ Union Find/ Merge Set -> End
 
   let colorX = [[] , [], [], [], [], [], [], [], [] , [], [], [], [], [], [], [], [] , [], [], [], [], [], [], [], [], []]
   let colorY = [[] , [], [], [], [], [], [], [], [] , [], [], [], [], [], [], [], [] , [], [], [], [], [], [], [], [], []]
@@ -113,7 +148,118 @@ export default function BoardSolver(props) {
 
   let dr = [-1, 0, 1, 0];
   let dc = [0, -1, 0, 1];
+
+  // Checks if there is a colour which cannot be connected 
+  function checkForStuckColors(ind) {
+    let stuckColorExists = false;
+
+    for (let index = ind+1; index < colorsAccToFreeMoves.length; index++) {
+      let element = colorsAccToFreeMoves[index];
+
+      let color = element[1];
+
+      let colorStartPosX = colorX[color][0];
+      let colorStartPosY = colorY[color][0];
+
+      let colorEndPosX = colorX[color][1];
+      let colorEndPosY = colorY[color][1];
+
+      let checkerGrid = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0]];
+
+      let labelGrid = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0, 0]];
+
+      for (let row = 0; row < n; row++) {
+        for (let col = 0; col < m; col++) {
+          if (vis[row][col] === 0) {
+            checkerGrid[row][col] = 1;
+          }
+
+          if (row === colorStartPosX && col === colorStartPosY) {
+            checkerGrid[row][col] = 1;
+          }
+
+          if (row === colorEndPosX && col === colorEndPosY) {
+            checkerGrid[row][col] = 1;
+          }
+        }
+      }
+
+      // Initializes the parent list of Disjoint Set
+      intializeDisjointSet(n * m);
+      let currentLabel = 0;
+
+      for (let row = 0; row < n; row++) {
+        for (let col = 0; col < m; col++) {
+          if (checkerGrid[row][col] === 0) continue;
+          let top = 0;
+          let left = 0;
+
+          if (col-1 >= 0 && checkerGrid[row][col-1] === 1) {
+              left = labelGrid[row][col-1];
+          }
+
+          if (row-1 >= 0 && checkerGrid[row-1][col] === 1) {
+              top = labelGrid[row-1][col];
+          }
+          
+          if (top === 0 && left === 0) {
+              currentLabel++;
+              labelGrid[row][col] = currentLabel;
+          }
+
+          if (top !== 0 && left === 0) {
+              labelGrid[row][col] = findParent(top);
+          }
+
+          if (top === 0 && left !== 0) {
+              labelGrid[row][col] = findParent(left);
+          }
+
+          if (top !== 0 && left !== 0) {
+              Union(top, left);
+              labelGrid[row][col] = findParent(left);
+          }
+        }
+      }
+
+      let startParent = findParent(labelGrid[colorStartPosX][colorStartPosY]);
+      let endParent = findParent(labelGrid[colorEndPosX][colorEndPosY]);
+
+      // Check if the two positions of the color belong to the same component
+      if (startParent !== endParent) {
+        stuckColorExists = true;
+        break;
+      } 
+    }
+
+    return stuckColorExists;
+  }
   
+  // Function which returns true if the current state of the grid is solvable or returns false otherwise
+  function performValidityCheck(ind, currentColor) {
+    if (checkForStuckColors(ind)) {
+      return false;
+    }
+    
+    return true;
+  }
+
   // Recursive function which traces the path of a color -> Depth First Search
   function solveThisColor(row, col, ind) {
     let color = colorsAccToFreeMoves[ind][1];
@@ -133,6 +279,14 @@ export default function BoardSolver(props) {
 
     vis[row][col] = 1;
     grid[row][col] = color;
+
+    // Checking if the current state of the grid is solvable
+    let isValidState = performValidityCheck(ind, color);
+    if (!isValidState) {
+      vis[row][col] = prevVis;
+      grid[row][col] = prev;
+      return; 
+    }
 
     // Continuing with current state of the grid
     for (let i = 0; i < 4; i++) {
@@ -247,7 +401,6 @@ export default function BoardSolver(props) {
     colorManager(0);
 
     if (solved === 0) {
-      console.log("Unable to solve the puzzle :(");
       return;
     }
 
@@ -296,16 +449,16 @@ export default function BoardSolver(props) {
       <button id="solve" type="button" disabled={disableSolve} className="btn btn-outline-primary" onClick={() =>{
         let solve = true;
         let count = 0;
-        setDisableSolve(1);
-
+        
         coord.forEach((coordinateId, color) => {
           if (coordinateId.length % 2) {
             solve = false;
           }
           count += coordinateId.length;
         });
-
+        
         if (solve && count) {
+          setDisableSolve(1);
           // Starts solving the puzzle
           main();
 
@@ -322,6 +475,14 @@ export default function BoardSolver(props) {
             solved ? "success" : "primary",
             1  
           );
+
+          setTimeout(()=> {
+            props.showAlert(
+              "Click on Clear to clear the board!",
+              "primary",
+              0
+            );
+          }, 3000);
           
           setSolutionGrid(solutionTmp);
         } else {
@@ -330,11 +491,16 @@ export default function BoardSolver(props) {
             "warning",
             1
           );
-          console.log("Enter valid coordinates.");
         }
       }}>Solve!!</button>
 
       <button id="clear" type="button" className="btn btn-outline-primary" onClick={() =>{
+          props.showAlert(
+            "Select two position for any color that you pick and lets see if a solution exists in which entire board can be filled connecting two ends of a color!",
+            "primary",
+            1
+          );
+
           setDisableSolve(0);
           setSolutionGrid(Array(81).fill("undef"));
           setCoord(new Map([
