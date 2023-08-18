@@ -1,3 +1,7 @@
+# Flow Puzzle Solver in React
+Ever played the game Flow Free on your phone!
+Well here is a app which solves the puzzle implemented in React!
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
