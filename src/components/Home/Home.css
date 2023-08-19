@@ -1,0 +1,96 @@
+.heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 0vh;
+    height: 20vh;
+    font-size: 6em;
+    animation: slideover 3s 1 ease-out;
+}
+
+.continue {
+    position: relative;
+    font-size: 2em;
+}
+
+#continueCont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10vw;
+    margin: 15vh auto;
+}
+
+@keyframes continueFade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideover {
+    0% {
+        opacity: 0;
+        font-size: 9em;
+        margin-top: 30vh;
+    }
+
+    10% {
+        opacity: 0.25;
+        font-size: 9em;
+        margin-top: 30vh;
+    }
+
+    20% {
+        opacity: 0.5;
+        font-size: 9em;
+        margin-top: 30vh;
+    }
+
+    30% {
+        opacity: 0.75;
+        font-size: 9em;
+        margin-top: 30vh;
+    }
+
+    40% {
+        opacity: 1;
+        font-size: 9em;
+        margin-top: 30vh;
+    }
+
+    50% {
+        opacity: 1;
+        font-size: 9em;
+        margin-top: 29vh;
+    }
+
+    60% {
+        opacity: 1;
+        font-size: 9em;
+        margin-top: 28vh;
+    }
+
+    80% {
+        opacity: 1;
+        font-size: 9em;
+        margin-top: 30vh;
+    }
+
+    90% {
+        opacity: 1;
+        font-size: 9em;
+        margin-top: 30vh;
+    }
+
+    100% { 
+        opacity: 1;
+        font-size: 6em;
+        margin-top: 0vh;
+    }
+}

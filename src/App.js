@@ -4,6 +4,7 @@ import BoardSolver from "./components/BoardSolver/BoardSolver";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer"
 import About from "./components/About/About";
+import Home from './components/Home/Home'
 
 import {
   BrowserRouter,
@@ -13,6 +14,7 @@ import {
 
 function App() {
   const [boardSize, setBoardSize] = useState(5);
+  const [isBoard, setIsBoard] = useState(0);
   const [alert, setAlert] = useState({
     message: "Select two position for any color that you pick and lets see if a solution exists in which entire board can be filled connecting two ends of a color!",
     type: "primary"
@@ -37,14 +39,15 @@ function App() {
   return (
     <> 
       <BrowserRouter>
-        <Navbar></Navbar>
+        <Navbar isBoard={isBoard}></Navbar>
         <Routes>
-          <Route path="/" element={<GridInfo setBoardSize={setBoardSize}/>}></Route>
-          <Route path="/board" element={
-            <BoardSolver boardSize={boardSize} showAlert={showAlert} alert={alert}/>
+          <Route path="/" element={<Home setIsBoard={setIsBoard}></Home>}></Route>
+          <Route path="/board" element={<GridInfo setBoardSize={setBoardSize} setIsBoard={setIsBoard}/>}></Route>
+          <Route path="/board/solve" element={
+            <BoardSolver boardSize={boardSize} showAlert={showAlert} alert={alert} setIsBoard={setIsBoard}/>
           }>
           </Route>
-          <Route path="/about" element={<About/>}></Route>
+          <Route path="/about" element={<About setIsBoard={setIsBoard}/>}></Route>
         </Routes>
 
         <Footer></Footer>

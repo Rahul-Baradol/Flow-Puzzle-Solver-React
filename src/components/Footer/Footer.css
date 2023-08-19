@@ -7,14 +7,10 @@ footer {
     background-color: #1a76fe;
     bottom: 0vh;
     height: 6vh;
-    font-size: 0.85em;
+    font-size: 0.8em;
 }
 
 #p1{
     font-style: italic;
-}
-
-#p2 {
     margin-left: auto;
-    font-style: italic;
 }

@@ -1,0 +1,76 @@
+#titlePartFlow {
+    animation: animateFade 3s infinite;
+}
+
+#titlePartPuzzle {
+    animation: animateFade 2s infinite;
+}
+
+#titlePartSolver {
+    animation: animateFade 1s infinite;
+}
+
+.title {
+    position: relative;
+    height: 20vh;
+    font-size: 6em;
+    margin: 0 0.7vw;
+}
+
+.titleBox {
+    display: flex;
+    justify-content: center;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info {
+    width: 60vw;
+    text-align: center;
+    margin-top: 4vh;
+    border: 1px solid rgba(213, 213, 213, 1);
+    transition: width 1s;
+    transition: border 1s, width 1s;
+}
+
+.links {
+    display: flex;
+}
+
+.github {
+    width: 18rem;
+    margin: 8vh 2vw;
+}
+
+.customCard {
+    border: 1px solid rgba(213, 213, 213, 1);
+    border-radius: 2%;
+    transition: border 1.5s;
+}
+
+.customCard:hover {
+    border: 1px solid #0d6efd;
+}
+
+.info:hover {
+    width: 65vw;
+    border: 1px solid #0d6efd;
+}
+
+@keyframes animateFade {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

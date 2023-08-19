@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom'
 import './GridInfo.css'
 
 export default function GridInfo(props) {
+  props.setIsBoard(0);
+
   return (
     <>
     <div className="container customContainer">
       <h1 id="message">Choose the size of the board!</h1>
       <div className="top container">
-        <Link to="/board">
+        <Link to="/board/solve">
           <button type="button" className="btn btn-outline-primary customBtns"
                 onClick={()=> {
                     props.setBoardSize(4);
@@ -24,8 +26,8 @@ export default function GridInfo(props) {
         </Link>
       </div>
 
-      <div className="bottom container">
-        <Link to="/board">
+      {/* <div className="bottom container">
+        <Link to="/board/solve">
           <button type="button" className="btn btn-outline-primary customBtns"
                 onClick={()=> {
                   props.setBoardSize(7);
@@ -39,8 +41,8 @@ export default function GridInfo(props) {
                     props.setBoardSize(9);
                 }}><h5>9 x 9</h5></button>
         </Link>
+      </div> */}
 
-      </div>
     </div>
     </>
   )

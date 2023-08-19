@@ -4,6 +4,8 @@ import ColorElement from './ColorElement/ColorElement';
 import AlertMessage from './AlertMessage/AlertMessage'
 
 export default function BoardSolver(props) {
+  props.setIsBoard(1);
+
   let size = props.boardSize;
   let val = (props.boardSize === 4 ? "four" : 
               (props.boardSize === 5 ? "five" : 
@@ -261,18 +263,45 @@ export default function BoardSolver(props) {
   }
 
   // Recursive function which traces the path of a color -> Depth First Search
-  function solveThisColor(row, col, ind) {
-    let color = colorsAccToFreeMoves[ind][1];
+  function solvePuzzle(row, col, ind) {
     if (solved === 1) { 
       return;
     }
+
+    if (ind === colorsAccToFreeMoves.length) {
+      let ok = 1;
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < m; j++) {
+          if (vis[i][j] === 0)
+            ok = 0;
+        }
+      }
+
+      if (ok === 1) {
+        solved = 1;
+      }
+      return;
+    }
+
+    let color = colorsAccToFreeMoves[ind][1];
 
     let prev = grid[row][col];
     let prevVis = vis[row][col];
 
     if (colorX[color][1] === row && colorY[color][1] === col) {
       vis[row][col] = 1;
-      colorManager(ind+1);
+      
+      // Move to next color state
+        if (ind+1 === colorsAccToFreeMoves.length) {
+          solvePuzzle(-1, -1, ind+1);
+        } else {
+          let newColor = colorsAccToFreeMoves[ind+1][1];
+          let nextRow = colorX[newColor][0];
+          let nextCol = colorY[newColor][0];
+          solvePuzzle(nextRow, nextCol, ind+1);
+        }
+      // End
+
       vis[row][col] = prevVis;
       return;
     }
@@ -294,7 +323,7 @@ export default function BoardSolver(props) {
       let newCol = col + dc[i];
       if (newRow < n && newCol < m && newRow >= 0 && newCol >= 0) {
         if (vis[newRow][newCol] === 0 || (vis[newRow][newCol] === 2 && grid[newRow][newCol] === color)) {
-          solveThisColor(newRow, newCol, ind);
+          solvePuzzle(newRow, newCol, ind);
         }
 
         if (solved) return;
@@ -303,33 +332,6 @@ export default function BoardSolver(props) {
 
     grid[row][col] = prev;
     vis[row][col] = prevVis;
-  }
-
-  function colorManager(ind) {
-    if (ind >= colorsAccToFreeMoves.length) {
-      let ok = 1;
-      for (let i = 0; i < n; i++) {
-        for (let j = 0; j < m; j++) {
-          if (vis[i][j] === 0) {
-            ok = 0;
-          }
-        }
-      }
-
-      if (ok === 1) {
-        solved = 1;
-      }
-      return;
-    }
-
-    if (solved === 1) {
-      return;
-    }
-
-    let color = colorsAccToFreeMoves[ind][1];
-    let row = colorX[color][0];
-    let col = colorY[color][0];
-    solveThisColor(row, col, ind);
   }
 
   // Starts Solving the puzzle  
@@ -398,8 +400,12 @@ export default function BoardSolver(props) {
     // sorting in ascending order of free moves
     colorsAccToFreeMoves.sort();
 
-    colorManager(0);
-
+    // colorManager(0);
+    let startColor = colorsAccToFreeMoves[0][1];
+    let startX = colorX[startColor][0];
+    let startY = colorY[startColor][0];
+    solvePuzzle(startX, startY, 0);
+  
     if (solved === 0) {
       return;
     }

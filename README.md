@@ -1,6 +1,13 @@
-# Flow Puzzle Solver in React
+# Flow Puzzle Solver
 Ever played the game Flow Free on your phone!
-Well here is a app which solves the puzzle implemented in React!
+Well this project solves the puzzles given in game Flow Free!
+
+I have used React and Bootstrap to build the project!
+And to solve the puzzle, I have used Recursion which is further optimised using Connected Component Labeling and 
+Dijoint Set/Union Find algorithm!
+
+I am still trying to improve the algorithm so that it can also solve puzzles of boards of size 9x9 or 10x10
+The following is the procedure to run the project on your system!
 
 # Getting Started with Create React App
 
