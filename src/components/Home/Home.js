@@ -7,7 +7,7 @@ export default function Home(props) {
 
   useEffect(() => {
     props.setIsBoard(0);
-  }, [])
+  })
 
   setTimeout(()=>{
     setVisContinue("flex");

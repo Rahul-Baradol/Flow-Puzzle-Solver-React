@@ -4,7 +4,7 @@ import './About.css'
 export default function About(props) {
   useEffect(() => {
     props.setIsBoard(1);
-  }, [])
+  })
 
   return (
     <>

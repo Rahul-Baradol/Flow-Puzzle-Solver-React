@@ -5,7 +5,7 @@ import './GridInfo.css'
 export default function GridInfo(props) {
   useEffect(() => {
     props.setIsBoard(0);
-  }, [])
+  })
 
   return (
     <>

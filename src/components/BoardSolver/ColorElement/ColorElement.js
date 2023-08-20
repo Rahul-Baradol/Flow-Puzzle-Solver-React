@@ -5,10 +5,6 @@ export default function ColorElement(props) {
     const [activeColor, setActiveColor] = useState("white");
     const [clearVal, setClearVal] = useState(0);
 
-    if (props.solutionColor !== "undef" && activeColor !== props.solutionColor) {
-        setActiveColor(props.solutionColor);
-    }
-
     if (clearVal !== props.mainClear) {
         setClearVal(props.mainClear);
         setActiveColor("white");
@@ -24,6 +20,7 @@ export default function ColorElement(props) {
     return (
         props.valid && 
         <div onClick={() => {
+            if (props.disableSolve) return;
             if (activeColor === "white" && freqOfColor.get(props.color) < 2) {
                 setActiveColor(props.color);
                 freqOfColor.set(props.color, freqOfColor.get(props.color)+1);
@@ -42,7 +39,7 @@ export default function ColorElement(props) {
                 props.setFreqOfColor(freqOfColor);
                 props.setCoord(coord)
             }
-        }} style={style} id="colorElement">
+        }} style={style} id={`${props.id}`} className="colorElement">
             
         </div>
     )
