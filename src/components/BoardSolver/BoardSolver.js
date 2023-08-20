@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './BoardSolver.css'
 import ColorElement from './ColorElement/ColorElement';
 import AlertMessage from './AlertMessage/AlertMessage'
 
 export default function BoardSolver(props) {
-  props.setIsBoard(1);
+
+  useEffect(()=> {
+    props.setIsBoard(1);
+  }, [])
 
   let size = props.boardSize;
   let val = (props.boardSize === 4 ? "four" : 

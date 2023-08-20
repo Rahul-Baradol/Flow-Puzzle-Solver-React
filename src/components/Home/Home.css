@@ -67,19 +67,22 @@
     50% {
         opacity: 1;
         font-size: 9em;
-        margin-top: 29vh;
+        margin-top: 30vh;
+        scale: 1;
     }
 
     60% {
         opacity: 1;
         font-size: 9em;
-        margin-top: 28vh;
+        margin-top: 30vh;
+        scale: 1.1;
     }
 
     80% {
         opacity: 1;
         font-size: 9em;
         margin-top: 30vh;
+        scale: 1;
     }
 
     90% {

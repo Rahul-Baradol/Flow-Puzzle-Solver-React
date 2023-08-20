@@ -1,9 +1,11 @@
-import React from 'react'
+import {React, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import './GridInfo.css'
 
 export default function GridInfo(props) {
-  props.setIsBoard(0);
+  useEffect(() => {
+    props.setIsBoard(0);
+  }, [])
 
   return (
     <>
