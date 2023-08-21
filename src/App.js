@@ -20,6 +20,11 @@ function App() {
     type: "primary"
   });
 
+  // Enable/Disable Board, About, Home link states
+  const [goToHome, setGoToHome] = useState(1);
+  const [goToAbout, setGoToAbout] = useState(1);
+  const [goToBoard, setGoToBoard] = useState(1);
+
   let showAlert = (msg, typ, dismiss) => {
     setAlert({
       message: msg,
@@ -39,12 +44,12 @@ function App() {
   return (
     <> 
       <BrowserRouter>
-        <Navbar isBoard={isBoard}></Navbar>
+        <Navbar isBoard={isBoard} goToHome={goToHome} goToAbout={goToAbout} goToBoard={goToBoard}></Navbar>
         <Routes>
           <Route path="/" element={<Home setIsBoard={setIsBoard}></Home>}></Route>
           <Route path="/board" element={<GridInfo setBoardSize={setBoardSize} setIsBoard={setIsBoard}/>}></Route>
           <Route path="/board/solve" element={
-            <BoardSolver boardSize={boardSize} showAlert={showAlert} alert={alert} setIsBoard={setIsBoard}/>
+            <BoardSolver setGoToHome={setGoToHome} setGoToAbout={setGoToAbout} setGoToBoard={setGoToBoard} boardSize={boardSize} showAlert={showAlert} alert={alert} setIsBoard={setIsBoard}/>
           }>
           </Route>
           <Route path="/about" element={<About setIsBoard={setIsBoard}/>}></Route>

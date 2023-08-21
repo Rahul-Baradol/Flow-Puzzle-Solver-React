@@ -24,6 +24,7 @@
     height: 8vh;
     margin: 14vh 38vw;
     font-size: 1rem;
+    transition: scale 1s;    
 }
 
 /* Clear */
@@ -33,6 +34,27 @@
     height: 8vh;
     margin: -22vh 50vw;
     font-size: 1rem;
+    transition: scale 1s;
+}
+
+#solve:hover {
+    animation: hoverIn 1 1s ease-in-out;
+    scale: 1.05;
+}
+
+#clear:hover {
+    animation: hoverIn 1 1s ease-in-out;
+    scale: 1.05;
+}
+
+@keyframes hoverIn {
+    0% {
+        scale: 1;
+    }
+
+    100% {
+        scale: 1.05;
+    }
 }
 
 /* The color options */

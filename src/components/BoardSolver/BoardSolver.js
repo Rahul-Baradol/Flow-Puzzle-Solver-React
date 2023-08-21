@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './BoardSolver.css'
 import ColorElement from './ColorElement/ColorElement';
 import AlertMessage from './AlertMessage/AlertMessage'
@@ -62,6 +62,37 @@ export default function BoardSolver(props) {
     // Disable Clear Button
     const [disableClear, setDisableClear] = useState(0);
 
+    // Ids for color elements in the grid
+    let four = [];
+    for (let i = 0; i < 16; i++) {
+      four.push(i);
+    }
+
+    let five = [];
+    for (let i = 16; i < 25; i++) {
+      five.push(i);
+    }
+
+    let six = [];
+    for (let i = 25; i < 36; i++) {
+      six.push(i);
+    }
+
+    let seven = [];
+    for (let i = 36; i < 49; i++) {
+      seven.push(i);
+    }
+
+    let eight = [];
+    for (let i = 49; i < 64; i++) {
+      eight.push(i);
+    }
+
+    let nine = [];
+    for (let i = 64; i < 81; i++) {
+      nine.push(i);
+    }
+    
   // ----------------------------------------------- Puzzle Solver ----------------------------------------------- //
   let n = size;
   let m = size;
@@ -496,7 +527,11 @@ export default function BoardSolver(props) {
 
           if (solved === 0) return 0;
           
+          // Display the solution if it exists
           setDisableClear(1);
+          props.setGoToBoard(false);
+          props.setGoToAbout(false);
+          props.setGoToHome(false);
           
           for (let i = 0; i < size * size; i++) {
             setTimeout(()=>{
@@ -506,6 +541,9 @@ export default function BoardSolver(props) {
 
           setTimeout(()=>{
             setDisableClear(0);
+            props.setGoToBoard(true);
+            props.setGoToAbout(true);
+            props.setGoToHome(true);
           }, tracePathDelay * (size * size))
 
         } else {
@@ -578,92 +616,42 @@ export default function BoardSolver(props) {
       }}>Clear</button>
 
       <div id={val} className="board">
-        <ColorElement id={0}  mainClear={mainClear} disableSolve={disableSolve} coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={1}  mainClear={mainClear} disableSolve={disableSolve} coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={2}  mainClear={mainClear} disableSolve={disableSolve} coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={3}  mainClear={mainClear} disableSolve={disableSolve} coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={4}  mainClear={mainClear} disableSolve={disableSolve} coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={5}  mainClear={mainClear} disableSolve={disableSolve} coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={6}  mainClear={mainClear} disableSolve={disableSolve} coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={7}  mainClear={mainClear} disableSolve={disableSolve} coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={8}  mainClear={mainClear} disableSolve={disableSolve} coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={9}  mainClear={mainClear} disableSolve={disableSolve} coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={10} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={11} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={12} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={13} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={14} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-        <ColorElement id={15} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
-  
-        <ColorElement id={16} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 5}></ColorElement>
-        <ColorElement id={17} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 5}></ColorElement>
-        <ColorElement id={18} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 5}></ColorElement>
-        <ColorElement id={19} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 5}></ColorElement>
-        <ColorElement id={20} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 5}></ColorElement>
-        <ColorElement id={21} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 5}></ColorElement>
-        <ColorElement id={22} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 5}></ColorElement>
-        <ColorElement id={23} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 5}></ColorElement>
-        <ColorElement id={24} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 5}></ColorElement>
+        {
+          four.map((value, index) => {
+            return <ColorElement key={index} id={value} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 4}></ColorElement>
+          })
+        }
+
+        {
+          five.map((value, index) => {
+            return <ColorElement key={index} id={value} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 5}></ColorElement>
+          })
+        }
+
+        {
+          six.map((value, index) => {
+            return <ColorElement key={index} id={value} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 6}></ColorElement>
+          })
+        }
+
+        {
+          seven.map((value, index) => {
+            return <ColorElement key={index} id={value} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
+          })
+        }
         
-        <ColorElement id={25} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 6}></ColorElement>
-        <ColorElement id={26} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 6}></ColorElement>
-        <ColorElement id={27} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 6}></ColorElement>
-        <ColorElement id={28} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 6}></ColorElement>
-        <ColorElement id={29} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 6}></ColorElement>
-        <ColorElement id={30} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 6}></ColorElement>
-        <ColorElement id={31} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 6}></ColorElement>
-        <ColorElement id={32} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 6}></ColorElement>
-        <ColorElement id={33} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 6}></ColorElement>
-        <ColorElement id={34} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 6}></ColorElement>
-        <ColorElement id={35} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 6}></ColorElement>
-         
-        <ColorElement id={36} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
-        <ColorElement id={37} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
-        <ColorElement id={38} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
-        <ColorElement id={39} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
-        <ColorElement id={40} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
-        <ColorElement id={41} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
-        <ColorElement id={42} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
-        <ColorElement id={43} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
-        <ColorElement id={44} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
-        <ColorElement id={45} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
-        <ColorElement id={46} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
-        <ColorElement id={47} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
-        <ColorElement id={48} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
+        {
+          eight.map((value, index) => {
+            return <ColorElement key={index} id={value} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
+          })
+        }
+      
+        {
+          nine.map((value, index) => {
+            return <ColorElement key={index} id={value} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
+          })
+        }
         
-        <ColorElement id={49} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={50} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={51} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={52} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={53} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={54} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={55} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={56} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={57} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={58} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={59} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={60} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={61} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={62} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        <ColorElement id={63} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-        
-        <ColorElement id={64} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={65} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={66} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={67} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={68} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={69} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={70} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={71} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={72} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={73} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={74} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={75} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={76} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={77} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={78} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={79} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
-        <ColorElement id={80} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
       </div>
     </div>
     </>

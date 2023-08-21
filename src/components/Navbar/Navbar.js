@@ -7,15 +7,15 @@ export default function Navbar(props) {
     <>
         <nav className="navbar navbar-dark navbar-expand-lg bg-primary" id="customNav">
   <div className="container-fluid">
-    <Link className="navbar-brand" to="/" id="heading">Flow Puzzle - Solver</Link>
+    <Link className="navbar-brand" to={props.goToHome ? "/" : "/board/solve"} id="heading">Flow Puzzle - Solver</Link>
     {props.isBoard ? <ul className="navbar-nav">
         <li className="nav-item">
-          <Link className="nav-link active" aria-current="page" to="/board">Board</Link>
+          <Link className="nav-link active" aria-current="page" to={props.goToBoard ? "/board" : "/board/solve"}>Board</Link>
         </li>
       </ul> : <></>}
       <ul className="navbar-nav" id="about">
         <li className="nav-item">
-          <Link className="nav-link active" aria-current="page" to="/about" id="about">About</Link>
+          <Link className="nav-link active" aria-current="page" to={props.goToAbout ? "/about" : "/board/solve"} id="about">About</Link>
         </li>
       </ul>
   </div>
