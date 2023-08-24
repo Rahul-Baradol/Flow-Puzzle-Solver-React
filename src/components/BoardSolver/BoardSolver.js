@@ -190,28 +190,7 @@ export default function BoardSolver(props) {
   function checkForStuckColors(ind) {
     let stuckColorExists = false;
 
-    for (let index = ind+1; index < colorsAccToFreeMoves.length; index++) {
-      let element = colorsAccToFreeMoves[index];
-
-      let color = element[1];
-
-      let colorStartPosX = colorX[color][0];
-      let colorStartPosY = colorY[color][0];
-
-      let colorEndPosX = colorX[color][1];
-      let colorEndPosY = colorY[color][1];
-
-      let checkerGrid = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0]];
-
-      let labelGrid = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+    let checkerGrid = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -221,76 +200,105 @@ export default function BoardSolver(props) {
                       [0, 0, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, 0, 0, 0, 0, 0, 0]];
 
-      for (let row = 0; row < n; row++) {
-        for (let col = 0; col < m; col++) {
-          if (vis[row][col] === 0) {
-            checkerGrid[row][col] = 1;
-          }
+    let labelGrid = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0]];
 
-          if (row === colorStartPosX && col === colorStartPosY) {
-            checkerGrid[row][col] = 1;
-          }
-
-          if (row === colorEndPosX && col === colorEndPosY) {
-            checkerGrid[row][col] = 1;
-          }
+    for (let row = 0; row < n; row++) {
+      for (let col = 0; col < m; col++) {
+        if (vis[row][col] === 0) {
+          checkerGrid[row][col] = 1;
         }
       }
-
-      // Initializes the parent list of Disjoint Set
-      intializeDisjointSet(n * m);
-      let currentLabel = 0;
-
-      for (let row = 0; row < n; row++) {
-        for (let col = 0; col < m; col++) {
-          if (checkerGrid[row][col] === 0) continue;
-          let top = 0;
-          let left = 0;
-
-          if (col-1 >= 0 && checkerGrid[row][col-1] === 1) {
-              left = labelGrid[row][col-1];
-          }
-
-          if (row-1 >= 0 && checkerGrid[row-1][col] === 1) {
-              top = labelGrid[row-1][col];
-          }
-          
-          if (top === 0 && left === 0) {
-              currentLabel++;
-              labelGrid[row][col] = currentLabel;
-          }
-
-          if (top !== 0 && left === 0) {
-              labelGrid[row][col] = findParent(top);
-          }
-
-          if (top === 0 && left !== 0) {
-              labelGrid[row][col] = findParent(left);
-          }
-
-          if (top !== 0 && left !== 0) {
-              Union(top, left);
-              labelGrid[row][col] = findParent(left);
-          }
-        }
-      }
-
-      let startParent = findParent(labelGrid[colorStartPosX][colorStartPosY]);
-      let endParent = findParent(labelGrid[colorEndPosX][colorEndPosY]);
-
-      // Check if the two positions of the color belong to the same component
-      if (startParent !== endParent) {
-        stuckColorExists = true;
-        break;
-      } 
     }
+
+    // Initializes the parent list of Disjoint Set
+    intializeDisjointSet(n * m);
+    let currentLabel = 0;
+
+    for (let row = 0; row < n; row++) {
+      for (let col = 0; col < m; col++) {
+        if (checkerGrid[row][col] === 0) continue;
+        let top = 0;
+        let left = 0;
+
+        if (col-1 >= 0 && checkerGrid[row][col-1] === 1) {
+            left = labelGrid[row][col-1];
+        }
+
+        if (row-1 >= 0 && checkerGrid[row-1][col] === 1) {
+            top = labelGrid[row-1][col];
+        }
+        
+        if (top === 0 && left === 0) {
+            currentLabel++;
+            labelGrid[row][col] = currentLabel;
+        }
+
+        if (top !== 0 && left === 0) {
+            labelGrid[row][col] = findParent(top);
+        }
+
+        if (top === 0 && left !== 0) {
+            labelGrid[row][col] = findParent(left);
+        }
+
+        if (top !== 0 && left !== 0) {
+            Union(top, left);
+            labelGrid[row][col] = findParent(left);
+        }
+      }
+    }
+
+    colorsAccToFreeMoves.forEach((element)=> {
+      let color = element[1];
+      if (color !== colorsAccToFreeMoves[ind][1]) {
+        let startPosX = colorX[color][0];
+        let startPosY = colorY[color][0];
+  
+        let endPosX = colorX[color][1];
+        let endPosY = colorY[color][1];
+        
+        let ok = 0;
+        for (let k1 = 0; k1 < 4; k1++) {
+            let newStartX = startPosX + dr[k1];
+            let newStartY = startPosY + dc[k1];
+
+            if (newStartX < 0 || newStartY < 0 || newStartX >= n || newStartY >= m) continue;
+
+            for (let k2 = 0; k2 < 4; k2++) {
+                let newEndX = endPosX + dr[k2];
+                let newEndY = endPosY + dc[k2];
+
+                if (newEndX < 0 || newEndY < 0 || newEndX >= n || newEndY >= m) continue;
+
+                if (findParent(labelGrid[newStartX][newStartY]) === findParent(labelGrid[newEndX][newEndY])) {
+                  ok = 1;    
+                  break;                
+                }
+            }
+
+            if (ok === 1) break;
+        }
+
+        if (ok === 0) {
+          stuckColorExists = true;
+        }
+      }
+    });
 
     return stuckColorExists;
   }
   
   // Function which returns true if the current state of the grid is solvable or returns false otherwise
-  function performValidityCheck(ind, currentColor) {
-    if (checkForStuckColors(ind)) {
+  function performValidityCheck(ind) {
+    if (checkForStuckColors(ind) === 1) {
       return false;
     }
     
@@ -312,8 +320,10 @@ export default function BoardSolver(props) {
         for (let j = 0; j < m; j++) {
           if (vis[i][j] === 0) {
             ok = 0;
+            break;
           }
         }
+        if (ok === 0) break;
       }
 
       if (ok === 1) {
@@ -368,7 +378,7 @@ export default function BoardSolver(props) {
           solvePuzzle(newRow, newCol, ind);
         }
 
-        if (solved) return;
+        if (solved === 1) return;
       }
     }
 
