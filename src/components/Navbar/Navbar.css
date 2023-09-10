@@ -4,6 +4,8 @@
 
 #customNav {
     height: 7.4vh;
+    background-color: rgb(1 28 58) !important;
+    transition: opacity 1s;
 }
 
 #heading {

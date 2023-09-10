@@ -15,6 +15,10 @@
     margin: 0 1vw;
 }
 
+.customBtns:hover {
+    background-color: #084daf !important;
+}
+
 .top {
     position: absolute;
     top: 16vh;
@@ -32,4 +36,5 @@
 #message {
     position: absolute;
     top: 1vh;
+    color: #025fe1;
 }

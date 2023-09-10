@@ -15,6 +15,7 @@ import {
 function App() {
   const [boardSize, setBoardSize] = useState(5);
   const [isBoard, setIsBoard] = useState(0);
+  const [isNavBar, setIsNavBar] = useState(0);
   const [alert, setAlert] = useState({
     message: "Select two position for any color that you pick and lets see if a solution exists in which entire board can be filled connecting two ends of a color!",
     type: "primary"
@@ -41,10 +42,14 @@ function App() {
     }
   };
 
+  setTimeout(()=>{
+    setIsNavBar(1); 
+  }, 3000)
+
   return (
     <> 
       <BrowserRouter>
-        <Navbar isBoard={isBoard} goToHome={goToHome} goToAbout={goToAbout} goToBoard={goToBoard}></Navbar>
+        <Navbar boot={isNavBar} isBoard={isBoard} goToHome={goToHome} goToAbout={goToAbout} goToBoard={goToBoard}></Navbar>
         <Routes>
           <Route path="/" element={<Home setIsBoard={setIsBoard}></Home>}></Route>
           <Route path="/board" element={<GridInfo setBoardSize={setBoardSize} setIsBoard={setIsBoard}/>}></Route>

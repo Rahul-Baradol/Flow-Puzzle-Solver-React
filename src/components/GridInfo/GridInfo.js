@@ -28,7 +28,7 @@ export default function GridInfo(props) {
         </Link>
       </div>
 
-      {/* <div className="bottom container">
+      <div className="bottom container">
         <Link to="/board/solve">
           <button type="button" className="btn btn-outline-primary customBtns"
                 onClick={()=> {
@@ -43,7 +43,7 @@ export default function GridInfo(props) {
                     props.setBoardSize(9);
                 }}><h5>9 x 9</h5></button>
         </Link>
-      </div> */}
+      </div>
 
     </div>
     </>

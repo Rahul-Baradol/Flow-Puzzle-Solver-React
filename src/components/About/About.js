@@ -26,7 +26,7 @@ export default function About(props) {
           <div className="card-body customCard">
             <h5 className="card-title">GitHub</h5>
             <p className="card-text">The source code is available on github. You can check it out!</p>
-            <a href="https://github.com/Rahul-Baradol/Flow-Puzzle-Solver-React" rel="noreferrer" target="_blank" className="btn btn-outline-primary">Go to Github</a>
+            <a href="https://github.com/Rahul-Baradol/Flow-Puzzle-Solver-React" rel="noreferrer" target="_blank" className="btn btn-outline-primary customButton">Go to Github</a>
           </div>
         </div>
 
@@ -34,7 +34,7 @@ export default function About(props) {
           <div className="card-body customCard">
             <h5 className="card-title">About Me!</h5>
             <p className="card-text">Check out my portfolio website to know more about me!</p>
-            <a href="#" rel="noreferrer" target="_blank" className="btn btn-primary">Checkout my portfolio</a>
+            <a href="#" rel="noreferrer" target="_blank" className="btn btn-primary customButton">Checkout my portfolio</a>
           </div>
         </div>
       </div>

@@ -360,7 +360,12 @@ export default function BoardSolver(props) {
     visitedInOrder[ptr++] = [(row * m) + col, color];
 
     // Checking if the current state of the grid is solvable
-    let isValidState = performValidityCheck(ind, color);
+    let isValidState = true;
+    
+    if (colorsAccToFreeMoves.length >= 3) {
+      isValidState = performValidityCheck(ind, color);
+    }
+
     if (!isValidState) {
       vis[row][col] = prevVis;
       grid[row][col] = prev;
@@ -456,6 +461,7 @@ export default function BoardSolver(props) {
     let startColor = colorsAccToFreeMoves[0][1];
     let startX = colorX[startColor][0];
     let startY = colorY[startColor][0];
+
     solvePuzzle(startX, startY, 0);
   
     if (solved === 0) {
@@ -601,7 +607,7 @@ export default function BoardSolver(props) {
         
         setMainClear(mainClear ^ 1);
         for (let i = 0; i < size * size; i++) {
-          document.getElementById(`${i}`).style.backgroundColor = "white";
+          document.getElementById(`${i}`).style.backgroundColor = "#838383";
         }
         
         grid =  [[-1, -1, -1, -1, -1, -1, -1, -1, -1],

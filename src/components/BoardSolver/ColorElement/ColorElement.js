@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import './ColorElement.css'
 
 export default function ColorElement(props) {
-    const [activeColor, setActiveColor] = useState("white");
+    let defaultColor = "#838383";
+    const [activeColor, setActiveColor] = useState(defaultColor);
     const [clearVal, setClearVal] = useState(0);
 
     if (clearVal !== props.mainClear) {
         setClearVal(props.mainClear);
-        setActiveColor("white");
+        setActiveColor(defaultColor);
     }
 
     let freqOfColor = props.freqOfColor;
@@ -21,15 +22,15 @@ export default function ColorElement(props) {
         props.valid && 
         <div onClick={() => {
             if (props.disableSolve) return;
-            if (activeColor === "white" && freqOfColor.get(props.color) < 2) {
+            if (activeColor === defaultColor && freqOfColor.get(props.color) < 2) {
                 setActiveColor(props.color);
                 freqOfColor.set(props.color, freqOfColor.get(props.color)+1);
                 coord.get(props.color).push(props.id);
 
                 props.setFreqOfColor(freqOfColor);
                 props.setCoord(coord)
-            } else if (activeColor !== "white" && props.color === activeColor) {
-                setActiveColor("white");
+            } else if (activeColor !== defaultColor && props.color === activeColor) {
+                setActiveColor(defaultColor);
                 freqOfColor.set(props.color, freqOfColor.get(props.color)-1);
                 let ind = coord.get(props.color).indexOf(props.id);
                 if (ind !== -1) {

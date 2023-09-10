@@ -32,9 +32,11 @@
     width: 60vw;
     text-align: center;
     margin-top: 4vh;
-    border: 1px solid rgba(213, 213, 213, 1);
+    border: 1px solid white !important;
     transition: width 1s;
     transition: border 1s, width 1s;
+    background-color: rgb(1 28 58) !important;
+    color: white !important;
 }
 
 .links {
@@ -44,6 +46,8 @@
 .github {
     width: 18rem;
     margin: 8vh 2vw;
+    background-color: rgb(1 28 58) !important;
+    color: white !important;
 }
 
 .customCard {
@@ -52,13 +56,23 @@
     transition: border 1.5s;
 }
 
+.customButton {
+    border: 1px solid white !important;
+    color: white !important;
+    background-color: rgb(1 28 58) !important;
+}
+
+.customButton:hover {
+    background-color: #084daf !important;
+}
+
 .customCard:hover {
     border: 1px solid #0d6efd;
 }
 
 .info:hover {
     width: 65vw;
-    border: 1px solid #0d6efd;
+    border: 1px solid #0d6efd !important;
 }
 
 @keyframes animateFade {
