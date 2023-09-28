@@ -2,40 +2,49 @@
     display: flex;
     flex-direction: column;
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* Puzzle Board */
 .board {
     display: grid;
+    align-items: center;
+    justify-items: center;
     grid-gap: 1vh;
     position: relative;
-    margin: -50vh auto;
     width: 60vw;
     height: 60vh;
     padding: 1.2vh 1.2vw;
+    border: 2px solid #022e61;
+}
+
+.middleContent {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Solve */
 #solve {
     position: relative;
-    width: 10vw;
-    height: 8vh;
-    margin: 14vh 38vw;
-    font-size: 1rem;
+    width: 8em;
+    height: 3em;
     transition: scale 1s;    
     border: 2px solid #084daf;
+    margin: 0 1em;
 }
 
 /* Clear */
 #clear {
     position: relative;
-    width: 10vw;
-    height: 8vh;
-    margin: -22vh 50vw;
-    font-size: 1rem;
+    width: 8em;
+    height: 3em;
     transition: scale 1s;
     border: 2px solid #084daf;
+    margin: 0 1em;
 }
 
 #solve:hover {
@@ -64,20 +73,50 @@
 .options {
     position: relative;
     display: flex;
-    align-items: center;
-    flex-direction: column;
-    height: 46vh;
-    width: 4vw;
-    margin: 4vh 15vw;
+    height: fit-content;
+    width: fit-content;
 }
 
 .option {
-    height: 4vh;
-    width: 2vw;
+    height: 0.9em;
+    width: 0.9em;
     border-radius: 100%;
     margin-top: 1vh;
+    margin: 1.5vh 1vw;
     transition: background-color .15s ease-in-out, border-color .15s ease-in-out;
     cursor: pointer;
+}
+
+@media (max-width: 300px) {
+    .option {
+        width: 0.8em;
+    }
+}
+
+@media (min-width: 700px) and (min-height: 900px) {
+    .option {
+        width: 1.75em;
+        height: 1.75em;
+    }
+}
+
+@media (min-width: 900px) and (min-width: 1100px) {
+    .option {
+        width: 1.85em;
+        height: 1.85em;
+    }
+}
+
+@media (max-width: 300px) {
+    #solve {
+        width: 5em;
+        height: 2.6em;
+    }   
+
+    #clear {
+        width: 5em;
+        height: 2.6em;
+    }
 }
 
 #redLabel {

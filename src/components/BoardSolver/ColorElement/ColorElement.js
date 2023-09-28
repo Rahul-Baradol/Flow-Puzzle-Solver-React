@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './ColorElement.css'
 
 export default function ColorElement(props) {
@@ -40,7 +40,7 @@ export default function ColorElement(props) {
                 props.setFreqOfColor(freqOfColor);
                 props.setCoord(coord)
             }
-        }} style={style} id={`${props.id}`} className="colorElement">
+        }} ref={props.reference} style={style} id={`${props.id}`} className="colorElement">
             
         </div>
     )

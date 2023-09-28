@@ -1,40 +1,31 @@
 .customContainer {
-    height: 60vh;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 4vh;
-    color: #0d6efd;
+    margin: 10vh 0 10vh 0;
 }
 
 .customBtns {
-    height: 15vh;
-    width: 20vw;
-    font-size: 120%;
-    margin: 0 1vw;
+    height: 6em;
+    width: 20em;
+    margin: 4vh 1vw;
 }
 
 .customBtns:hover {
     background-color: #084daf !important;
 }
 
-.top {
-    position: absolute;
-    top: 16vh;
-    display: flex;
-    justify-content: center;
-}
-
-.bottom {
-    position: absolute;
-    top: 40vh;
-    display: flex;
-    justify-content: center;
-}
-
 #message {
-    position: absolute;
     top: 1vh;
     color: #025fe1;
+}
+
+@media (max-width: 300px) {
+    #message {
+        font-size: 1.2em;
+    }    
+}
+
+@media (min-width: 700px) and (min-height: 900px) {
+    .customBtns {
+        width: 20em;
+        height: 8em;
+    }
 }

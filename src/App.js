@@ -59,8 +59,6 @@ function App() {
           </Route>
           <Route path="/about" element={<About setIsBoard={setIsBoard}/>}></Route>
         </Routes>
-
-        <Footer></Footer>
       </BrowserRouter>
     </>
   );

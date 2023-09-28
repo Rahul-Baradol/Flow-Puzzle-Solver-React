@@ -3,6 +3,18 @@
     align-items: center;
     height: 5vh;
     width: 100vw;
-    font-size: 0.82em;
-    margin: 0.8vh 0vw;
+    font-size: 0.75em;
+    margin: 1vh 0vw;
+}
+
+@media (min-width: 825px) {
+    .message {
+        font-size: 0.85em;
+    }
+}
+
+@media (max-width: 300px) {
+    .message {
+        font-size: 0.65em;
+    }
 }
