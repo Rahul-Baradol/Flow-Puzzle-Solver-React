@@ -2,7 +2,6 @@ import { useState } from "react";
 import GridInfo from "./components/GridInfo/GridInfo";
 import BoardSolver from "./components/BoardSolver/BoardSolver";
 import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer"
 import About from "./components/About/About";
 import Home from './components/Home/Home'
 

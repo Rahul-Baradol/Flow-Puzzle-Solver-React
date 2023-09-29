@@ -13,8 +13,8 @@
 .title {
     position: relative;
     height: 20vh;
-    font-size: 6em;
-    margin: 0 0.7vw;
+    font-size: 4em;
+    margin: 1vh 0.7vw;
 }
 
 .titleBox {
@@ -29,9 +29,8 @@
 }
 
 .info {
-    width: 60vw;
+    width: 70vw;
     text-align: center;
-    margin-top: 4vh;
     border: 1px solid white !important;
     transition: width 1s;
     transition: border 1s, width 1s;
@@ -41,6 +40,7 @@
 
 .links {
     display: flex;
+    flex-direction: row;
 }
 
 .github {
@@ -75,6 +75,10 @@
     border: 1px solid #0d6efd !important;
 }
 
+.linkCard {
+    border: 0 !important; 
+}
+
 @keyframes animateFade {
     0% {
         opacity: 1;
@@ -89,5 +93,49 @@
     100% {
         opacity: 1;
         scale: 1;
+    }
+}
+
+@media (max-width: 300px) {
+    .title {
+        font-size: 1.8em;
+    } 
+
+    .linkCard {
+        width: 12em;
+    }
+}
+
+@media (max-width: 700px) {
+    .links {
+        flex-direction: column;
+    }
+
+    .customCard {
+        margin: 3vh 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .info {
+        margin-top: -5vh;
+    }
+}
+
+@media (min-width: 300px) {
+    .title {
+        font-size: 2.4em;
+    }
+}
+
+@media (min-width: 700px) {
+    .title {
+        font-size: 3.5em;
+    }
+}
+
+@media (min-width: 900px) {
+    .title {
+        font-size: 4em;
     }
 }

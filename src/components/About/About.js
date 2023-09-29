@@ -22,7 +22,7 @@ export default function About(props) {
       </div>
 
       <div className="links">
-        <div className="card github customCard">
+        <div className="card github customCard linkCard">
           <div className="card-body customCard">
             <h5 className="card-title">GitHub</h5>
             <p className="card-text">The source code is available on github. You can check it out!</p>
@@ -30,7 +30,7 @@ export default function About(props) {
           </div>
         </div>
 
-        <div className="card github customCard">
+        <div className="card github customCard linkCard">
           <div className="card-body customCard">
             <h5 className="card-title">About Me!</h5>
             <p className="card-text">Check out my portfolio website to know more about me!</p>
