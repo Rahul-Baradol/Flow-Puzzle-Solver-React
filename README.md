@@ -6,7 +6,6 @@ I have used React and Bootstrap to build the project!
 And to solve the puzzle, I have used Recursion which is further optimised using Connected Component Labeling and 
 Dijoint Set/Union Find algorithm!
 
-I am still trying to improve the algorithm so that it can also solve puzzles of boards of size 9x9 or 10x10
 The following is the procedure to run the project on your system!
 
 # Getting Started with Create React App
