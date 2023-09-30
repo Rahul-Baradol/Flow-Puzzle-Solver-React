@@ -13,10 +13,7 @@ export default function BoardSolver(props) {
   let size = props.boardSize;
   let val = (props.boardSize === 4 ? "four" : 
               (props.boardSize === 5 ? "five" : 
-                (props.boardSize === 6 ? "six" : 
-                  (props.boardSize === 7 ? "seven" : 
-                    (props.boardSize === 8 ? "eight" : 
-                      (props.boardSize === 9 ? "nine" : "unknown"))))));
+                (props.boardSize === 6 ? "six" : "unknown")));
 
     // References to the color elements
     const colorElements = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)
@@ -88,44 +85,23 @@ export default function BoardSolver(props) {
     for (let i = 25; i < 36; i++) {
       six.push(i);
     }
-
-    let seven = [];
-    for (let i = 36; i < 49; i++) {
-      seven.push(i);
-    }
-
-    let eight = [];
-    for (let i = 49; i < 64; i++) {
-      eight.push(i);
-    }
-
-    let nine = [];
-    for (let i = 64; i < 81; i++) {
-      nine.push(i);
-    }
     
   // ----------------------------------------------- Puzzle Solver ----------------------------------------------- //
   let n = size;
   let m = size;
-  let grid = [[-1, -1, -1, -1, -1, -1, -1, -1, -1],
-              [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-              [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-              [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-              [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-              [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-              [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-              [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-              [-1, -1, -1, -1, -1, -1, -1, -1, -1]];
+  let grid = [[-1, -1, -1, -1, -1, -1],
+              [-1, -1, -1, -1, -1, -1],
+              [-1, -1, -1, -1, -1, -1],
+              [-1, -1, -1, -1, -1, -1],
+              [-1, -1, -1, -1, -1, -1],
+              [-1, -1, -1, -1, -1, -1]];
               
- let vis =    [[0, 0, 0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0, 0, 0]];
+ let vis =    [[0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0],
+              [0, 0, 0, 0, 0, 0]];
   
   let parent = []
   
@@ -490,8 +466,10 @@ export default function BoardSolver(props) {
 
   return (
     <>
-    <div className="main">
-      <AlertMessage alert={props.alert}></AlertMessage>
+    <main className="main">
+      <div className="alertControl">
+        <AlertMessage alert={props.alert}></AlertMessage>
+      </div>
 
       <div className="middleContent">
         <div id={val} className="board">
@@ -510,24 +488,6 @@ export default function BoardSolver(props) {
           {
             six.map((value, index) => {
               return <ColorElement reference={colorElements[value]} key={index} id={value} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 6}></ColorElement>
-            })
-          }
-
-          {
-            seven.map((value, index) => {
-              return <ColorElement reference={colorElements[value]} key={index} id={value} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 7}></ColorElement>
-            })
-          }
-          
-          {
-            eight.map((value, index) => {
-              return <ColorElement reference={colorElements[value]} key={index} id={value} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 8}></ColorElement>
-            })
-          }
-        
-          {
-            nine.map((value, index) => {
-              return <ColorElement reference={colorElements[value]} key={index} id={value} mainClear={mainClear} disableSolve={disableSolve}  coord={coord} setCoord={setCoord} freqOfColor={freqOfColor} setFreqOfColor={setFreqOfColor} color={currentColor} valid={size >= 9}></ColorElement>
             })
           }
         </div>
@@ -667,29 +627,22 @@ export default function BoardSolver(props) {
             colorElements[i].current.style.backgroundColor = "#838383";
           }
           
-          grid =  [[-1, -1, -1, -1, -1, -1, -1, -1, -1],
-                  [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-                  [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-                  [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-                  [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-                  [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-                  [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-                  [-1, -1, -1, -1, -1, -1, -1, -1, -1],
-                  [-1, -1, -1, -1, -1, -1, -1, -1, -1]];
+          grid =  [[-1, -1, -1, -1, -1, -1],
+                  [-1, -1, -1, -1, -1, -1],
+                  [-1, -1, -1, -1, -1, -1],
+                  [-1, -1, -1, -1, -1, -1],
+                  [-1, -1, -1, -1, -1, -1],
+                  [-1, -1, -1, -1, -1, -1]];
                 
-          vis =   [[0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0],
-                  [0, 0, 0, 0, 0, 0, 0, 0, 0]];
+          vis =   [[0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0]];
         }}>Clear</button>
       </div>
-
-    </div>
+    </main>
     </>
   )
 }

@@ -1,10 +1,9 @@
 .message {
     display: flex;
     align-items: center;
-    height: 5vh;
-    width: 100vw;
-    font-size: 0.75em;
-    margin: 1vh 0vw;
+    height: fit-content;
+    width: 98vw;
+    font-size: 0.85em;
 }
 
 @media (min-width: 825px) {
@@ -15,6 +14,6 @@
 
 @media (max-width: 300px) {
     .message {
-        font-size: 0.65em;
+        font-size: 0.8em;
     }
 }

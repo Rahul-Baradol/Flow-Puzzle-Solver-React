@@ -4,6 +4,7 @@ import BoardSolver from "./components/BoardSolver/BoardSolver";
 import Navbar from "./components/Navbar/Navbar";
 import About from "./components/About/About";
 import Home from './components/Home/Home'
+import NotFound from "./components/NotFound/NotFound";
 
 import {
   BrowserRouter,
@@ -57,6 +58,7 @@ function App() {
           }>
           </Route>
           <Route path="/about" element={<About setIsBoard={setIsBoard}/>}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
     </>

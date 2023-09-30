@@ -3,8 +3,9 @@
 }
 
 .customBtns {
-    height: 6em;
-    width: 20em;
+    height: 10vh;
+    width: 60vw;
+    max-width: 300px;
     margin: 4vh 1vw;
 }
 
@@ -15,6 +16,12 @@
 #message {
     top: 1vh;
     color: #025fe1;
+}
+
+#gridInfoContainer {
+    height: fit-content;
+    width: fit-content;
+    margin: auto;
 }
 
 @media (max-width: 300px) {
