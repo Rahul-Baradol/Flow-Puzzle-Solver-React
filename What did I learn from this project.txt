@@ -1,6 +1,0 @@
-1. Understood React states
-2. Understood the asynchronous behaviour of Javascript in a better way
-3. Learnt a new concept i.e Connected Component Labeling (which is actually used in computer vision also)
-4. Learnt a new way to apply Disjoint Set / Union Find algorithm
-
-ENJOYED IT :)   
