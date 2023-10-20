@@ -143,17 +143,30 @@ export default function BoardSolver(props) {
   let colorsAccToFreeMoves = [];
 
   let colorCodeToColor = new Map([
-    [0, "white"],
-    [1, "red"],
-    [2, "yellow"],
-    [3, "blue"],
-    [4, "green"],
-    [5, "orange"],
-    [6, "cyan"],
-    [7, "pink"],
-    [8, "lightgreen"],
-    [9, "lightblue"]
+    ["W", "white"],
+    ["R", "red"],
+    ["Y", "yellow"],
+    ["B", "blue"],
+    ["G", "green"],
+    ["O", "orange"],
+    ["C", "cyan"],
+    ["P", "pink"],
+    ["L", "lightgreen"],
+    ["Z", "lightblue"]
   ]);
+
+  // let colorCodeToColor = new Map([
+  //   [0, "white"],
+  //   [1, "red"],
+  //   [2, "yellow"],
+  //   [3, "blue"],
+  //   [4, "green"],
+  //   [5, "orange"],
+  //   [6, "cyan"],
+  //   [7, "pink"],
+  //   [8, "lightgreen"],
+  //   [9, "lightblue"]
+  // ]);
 
   let colorToColorCode = new Map([
     ["white", 0],
@@ -449,17 +462,89 @@ export default function BoardSolver(props) {
     let startX = colorX[startColor][0];
     let startY = colorY[startColor][0];
 
-    solvePuzzle(startX, startY, 0);
-  
-    if (solved === 0) {
-      return;
-    }
-
-    for (let i = 0; i < n; i++) {
-      for (let j = 0; j < m; j++) {
-        grid[i][j] = colorCodeToColor.get(grid[i][j]);
+    fetch("http://localhost:8000/", {
+      method: "POST",
+      headers: {
+        'Content-Type': "application/json"
+      },
+      body: JSON.stringify({
+        size: size,
+        grid: grid
+      })
+    }).then((res) => {
+      return res.json();
+    }).then((data) => {
+      let solution = data.solution;
+      
+      if (solution[0] === "-") {
+        solved = 0;
+        console.log("Unsolved");
+        return;
       }
-    }
+
+      solved = 1;
+
+      let arrSoluton = [];
+      for (let ele of solution) {
+        if (!(ele === '\r' || ele === '\n')) {
+          arrSoluton.push(ele); 
+        }
+      }
+
+      // console.log(arrSoluton);
+
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < m; j++) {
+          // console.log((i * size) + j, colorCodeToColor.get(arrSoluton[(i * size) + j]));
+          grid[i][j] = colorCodeToColor.get(arrSoluton[(i * size) + j]);
+        }
+      }
+
+      // checkpoint //
+    
+      props.showAlert(
+        solved ? "Puzzle is solved as follows!" : "Could not find the solution to the given puzzle",
+        solved ? "success" : "primary",
+        1  
+      );
+
+      setTimeout(()=> {
+        props.showAlert(
+          "Click on Clear to clear the board!",
+          "primary",
+          0
+        );
+      }, 3000);
+
+      if (solved === 0) return 0;
+      
+      // Display the solution if it exists
+      setDisableClear(1);
+      props.setGoToBoard(false);
+      props.setGoToAbout(false);
+      props.setGoToHome(false);
+      
+      // for (let i = 0; i < size * size; i++) {
+      //   setTimeout(()=>{
+      //     if (colorElements[visitedInOrder[i][0]] != null) {
+      //       colorElements[visitedInOrder[i][0]].current.style.backgroundColor = `${colorCodeToColor.get(visitedInOrder[i][1])}`;
+      //     }
+      //   }, tracePathDelay * (i+1))
+      // }
+      
+      for (let row = 0; row < size; row++) {
+        for (let col = 0; col < size; col++) {
+          colorElements[(row * size) + col].current.style.backgroundColor = `${grid[row][col]}`
+        }
+      }
+
+      setTimeout(()=>{
+        setDisableClear(0);
+        props.setGoToBoard(true);
+        props.setGoToAbout(true);
+        props.setGoToHome(true);
+      }, tracePathDelay * (size * size))  
+    })
   }
 
   // ----------------------------------------------- React Component ----------------------------------------------- //
@@ -539,59 +624,7 @@ export default function BoardSolver(props) {
             setDisableSolve(1);
             
             // Starts solving the puzzle
-            fetch("http://localhost:8000/", {
-              method: "POST",
-              headers: {
-                'Content-Type': "application/json"
-              },
-              body: JSON.stringify({
-                coord: Object.fromEntries(colorCodeToColor),
-              })
-            }).then((res) => {
-              return res.json();
-            }).then((data) => {
-              console.log(data);
-            })
-
             main();
-
-            props.showAlert(
-              solved ? "Puzzle is solved as follows!" : "Could not find the solution to the given puzzle",
-              solved ? "success" : "primary",
-              1  
-            );
-
-            setTimeout(()=> {
-              props.showAlert(
-                "Click on Clear to clear the board!",
-                "primary",
-                0
-              );
-            }, 3000);
-
-            if (solved === 0) return 0;
-            
-            // Display the solution if it exists
-            setDisableClear(1);
-            props.setGoToBoard(false);
-            props.setGoToAbout(false);
-            props.setGoToHome(false);
-            
-            for (let i = 0; i < size * size; i++) {
-              setTimeout(()=>{
-                if (colorElements[visitedInOrder[i][0]] != null) {
-                  colorElements[visitedInOrder[i][0]].current.style.backgroundColor = `${colorCodeToColor.get(visitedInOrder[i][1])}`;
-                }
-              }, tracePathDelay * (i+1))
-            }
-
-            setTimeout(()=>{
-              setDisableClear(0);
-              props.setGoToBoard(true);
-              props.setGoToAbout(true);
-              props.setGoToHome(true);
-            }, tracePathDelay * (size * size))
-
           } else {
             props.showAlert(
               "Enter valid color configuration",
