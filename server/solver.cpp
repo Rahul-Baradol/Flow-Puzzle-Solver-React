@@ -155,6 +155,9 @@ bool performValidityCheck(int ind, int currentColor) {
 }
 
 // Recursive function which traces the path of a color
+int ptr = 0;
+vector<pair<int, int>> visitedInOrder(82, {-1, 22});
+
 void solvePuzzle(int row, int col, int ind) {
     if (solved) {
         return;
@@ -203,6 +206,7 @@ void solvePuzzle(int row, int col, int ind) {
 
     vis[row][col] = 1;
     grid[row][col] = color;
+    visitedInOrder[ptr++] = make_pair((row * m) + col, color);
 
     // Checking if the current state of the grid is solvable
     bool isValidState = true;
@@ -214,6 +218,8 @@ void solvePuzzle(int row, int col, int ind) {
     if (!isValidState) {
         vis[row][col] = prevVis;
         grid[row][col] = prev;
+
+        visitedInOrder[--ptr] = make_pair((row * m) + col, prev);
         return;
     }
 
@@ -232,6 +238,7 @@ void solvePuzzle(int row, int col, int ind) {
     
     grid[row][col] = prev;
     vis[row][col] = prevVis;
+    visitedInOrder[--ptr] = make_pair((row * m) + col, prev);
 }
 
 int main() {
@@ -302,12 +309,15 @@ int main() {
     } 
 
     // cout << "\nYes it is possible to solve the puzzle as follows :)\n";
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
-            char color = grid[i][j] + 'A';
-            cout << color;
+    for (int i = 0; i < n * m; i++) {
+        char c = visitedInOrder[i].second + 'A';
+        if (visitedInOrder[i].first == -1) {
+
+        } else if (visitedInOrder[i].first < 10) {
+            cout << 0 << visitedInOrder[i].first << c << "\n";
+        } else {
+            cout << visitedInOrder[i].first << c << "\n";
         }
-        cout << "\n";
     }
 
     return 0;
