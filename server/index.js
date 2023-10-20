@@ -43,6 +43,10 @@ app.post('/', (req, res) => {
     })
 })
 
+app.get('/', (req, res) => {
+  res.send("Server working...");
+})
+
 app.listen(port, () => {
     console.log(`Flow Puzzle Solver Server running on port ${port}...`);
 })
