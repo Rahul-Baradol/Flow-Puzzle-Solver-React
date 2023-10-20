@@ -121,6 +121,11 @@ export default function BoardSolver(props) {
 
 	// Starts Solving the puzzle  
 	function main() {
+		setDisableClear(1);
+		props.setGoToBoard(false);
+		props.setGoToAbout(false);
+		props.setGoToHome(false);
+
 		coord.forEach((coordinateId, color) => {
 			if (coordinateId.length === 2) {
 				let startId = coordinateId[0], endId = coordinateId[1];
@@ -158,6 +163,11 @@ export default function BoardSolver(props) {
 					"primary",
 					1
 				);
+
+				setDisableClear(0);
+				props.setGoToBoard(true);
+				props.setGoToAbout(true);
+				props.setGoToHome(true);
 				return;
 			}
 
@@ -182,11 +192,6 @@ export default function BoardSolver(props) {
 			}, 3000);
 
 			// Display the solution if it exists
-			setDisableClear(1);
-			props.setGoToBoard(false);
-			props.setGoToAbout(false);
-			props.setGoToHome(false);
-
 			for (let i = 0; i < visitedInOrder.length; i++) {
 				setTimeout(() => {
 					if (colorElements[visitedInOrder[i][0]] != null) {
@@ -209,6 +214,10 @@ export default function BoardSolver(props) {
 					1
 				);
 			}, 3000);
+			setDisableClear(0);
+			props.setGoToBoard(true);
+			props.setGoToAbout(true);
+			props.setGoToHome(true);
 		})
 	}
 
