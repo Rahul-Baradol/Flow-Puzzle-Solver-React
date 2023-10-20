@@ -14,7 +14,7 @@ app.post('/', (req, res) => {
     
     let colorCodeToColor = ["W", "R", "Y", "B", "G", "O", "C", "P", "L", "Z"];
 
-    let child = execFile("./a.out", (error, stdout, stderr) => {
+    let child = execFile("./sol", (error, stdout, stderr) => {
       res.json({
         solution: stdout
       })
