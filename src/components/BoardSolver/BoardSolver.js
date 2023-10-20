@@ -143,7 +143,7 @@ export default function BoardSolver(props) {
 			}
 		});
 
-		fetch("http://localhost:8000/", {
+		fetch("https://flow-puzzle-solver-server.vercel.app:3000/", {
 			method: "POST",
 			headers: {
 				'Content-Type': "application/json"

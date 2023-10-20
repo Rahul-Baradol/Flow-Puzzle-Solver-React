@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const path = require('path');
 const execFile = require('child_process').execFile;
-const port = 8000;
+const port = 3000;
 
 app.use(cors());
 
