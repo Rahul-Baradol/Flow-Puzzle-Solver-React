@@ -295,24 +295,20 @@ int main() {
     // sorting in ascending order of free moves
     sort(colorsAccToFreeMoves.begin(), colorsAccToFreeMoves.end()); 
 
-    // cout << "\nCalculating...\n";
-
     int startColor = colorsAccToFreeMoves[0].second;
     int startX = colorX[startColor][0];
     int startY = colorY[startColor][0];
     solvePuzzle(startX, startY, 0);
 
     if (!solved) {
-        // cout << "\nNot possible to solve the given puzzle :(\n";
         cout << "-\n";
         return 0;
     } 
 
-    // cout << "\nYes it is possible to solve the puzzle as follows :)\n";
     for (int i = 0; i < n * m; i++) {
         char c = visitedInOrder[i].second + 'A';
         if (visitedInOrder[i].first == -1) {
-
+            // Do nothing :)
         } else if (visitedInOrder[i].first < 10) {
             cout << 0 << visitedInOrder[i].first << c << "\n";
         } else {

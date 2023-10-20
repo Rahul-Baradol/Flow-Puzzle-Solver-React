@@ -11,12 +11,10 @@ app.use(express.json())
 
 app.post('/', (req, res) => {
     let { grid, size } = req.body;
-    // console.log(grid);
     
     let colorCodeToColor = ["W", "R", "Y", "B", "G", "O", "C", "P", "L", "Z"];
 
     let child = execFile(path.join(__dirname, "/a.exe"), (error, stdout, stderr) => {
-      console.log(stdout);
       res.json({
         solution: stdout
       })
@@ -40,7 +38,6 @@ app.post('/', (req, res) => {
     })
 
     loop.then((data)=>{
-      console.log(`${size} ${size} ${input}\n`);
       if (size != undefined)
         child.stdin.write(`${size} ${size} ${input}\n`);
     })

@@ -327,7 +327,6 @@ export default function BoardSolver(props) {
 
 						setMainClear(mainClear ^ 1);
 						for (let i = 0; i < size * size; i++) {
-							// document.getElementById(`${i}`).style.backgroundColor = "#838383";
 							colorElements[i].current.style.backgroundColor = "#838383";
 						}
 
