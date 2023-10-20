@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const path = require('path');
 const execFile = require('child_process').execFile;
-const port = 3000;
+const port = 8000;
 
 app.use(cors());
 
@@ -41,6 +41,10 @@ app.post('/', (req, res) => {
       if (size != undefined)
         child.stdin.write(`${size} ${size} ${input}\n`);
     })
+})
+
+app.get('/', (req, res) => {
+  res.send("Server working...")
 })
 
 app.listen(port, () => {
