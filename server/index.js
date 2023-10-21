@@ -11,6 +11,7 @@ app.use(cors());
 app.use(express.json())
 
 app.post('/', (req, res) => {
+    req.socket.setTimeout(10 * 60 * 1000);
     let { grid, size } = req.body;
     
     let colorCodeToColor = ["W", "R", "Y", "B", "G", "O", "C", "P", "L", "Z"];
