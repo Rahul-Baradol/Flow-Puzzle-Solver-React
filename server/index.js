@@ -15,7 +15,7 @@ app.post('/', (req, res) => {
     
     let colorCodeToColor = ["W", "R", "Y", "B", "G", "O", "C", "P", "L", "Z"];
 
-    let child = execFile(path.join(__dirname, "/./a.out"), (error, stdout, stderr) => {
+    let child = execFile(path.join(__dirname, "/a.out"), (error, stdout, stderr) => {
       res.json({
         error: error,
         solution: stdout,
