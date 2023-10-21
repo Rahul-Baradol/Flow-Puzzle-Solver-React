@@ -1,6 +1,6 @@
 # Flow Puzzle Solver
 Ever played the game Flow Free on your phone!
-Well this project solves the puzzles given in game Flow Free!
+Well this project solves the puzzles given in game Flow Free!!
 
 I have used React and Bootstrap to build the project!
 And to solve the puzzle, I have used Recursion which is further optimised using Connected Component Labeling and 
