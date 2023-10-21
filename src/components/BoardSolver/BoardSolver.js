@@ -175,6 +175,8 @@ export default function BoardSolver(props) {
 					let id = parseInt(solution[ind] + "" + solution[ind + 1]);
 					visitedInOrder.push([id, solution[ind + 2]]);
 				}
+
+				console.log(data);
 	
 				props.showAlert(
 					"Puzzle is solved as follows!",
