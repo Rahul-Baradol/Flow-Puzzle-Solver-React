@@ -2,6 +2,7 @@ const express = require('express')
 const app = express();
 const cors = require('cors');
 const path = require('path');
+const { execFileSync } = require('child_process');
 const execFile = require('child_process').execFile;
 const port = 8000;
 
@@ -14,33 +15,37 @@ app.post('/', (req, res) => {
     
     let colorCodeToColor = ["W", "R", "Y", "B", "G", "O", "C", "P", "L", "Z"];
 
-    let child = execFile("./a.out", (error, stdout, stderr) => {
+    let child = execFile("././a.out", (error, stdout, stderr) => {
       res.json({
         solution: stdout
       })
     })
 
     child.stdin.setEncoding('utf-8');
-    let input = "";
+    // let input = "";
+
+    child.stdin.write(`${size}\n${size}\n`);
     let loop = new Promise((resolve, reject) => {
       for (let row = 0; row < size; row++) {
         let str = "";
         for (let col = 0; col < size; col++) {
           if (grid[row][col] === -1) {
-            str += '.';
+            // str += '.';
+            child.stdin.write(".\n");
           } else {
-            str += colorCodeToColor[grid[row][col]];
+            // str += colorCodeToColor[grid[row][col]];
+            child.stdin.write(`${colorCodeToColor[grid[row][col]]}\n`);
           }
         }
-        input = input + " " + str;
+        // input = input + " " + str;
       }
       resolve();
     })
 
-    loop.then((data)=>{
-      if (size != undefined)
-        child.stdin.write(`${size} ${size} ${input}\n`);
-    })
+    // loop.then((data)=>{
+    //   if (size != undefined)
+    //     child.stdin.write(`${size} ${size} ${input}\n`);
+    // })
 })
 
 app.get('/', (req, res) => {
