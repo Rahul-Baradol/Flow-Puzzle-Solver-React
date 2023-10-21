@@ -158,56 +158,58 @@ export default function BoardSolver(props) {
 		}).then((data) => {
 			let solution = data.solution;
 
-			if (solution[0] === "-") {
-				props.showAlert(
-					"Could not find the solution to the given puzzle",
-					"primary",
-					1
-				);
+			console.log(data);
 
-				setDisableClear(0);
-				props.setGoToBoard(true);
-				props.setGoToAbout(true);
-				props.setGoToHome(true);
-			} else {
-				let visitedInOrder = [];
-				for (let ind = 0; ind < solution.length; ind += 5) {
-					let id = parseInt(solution[ind] + "" + solution[ind + 1]);
-					visitedInOrder.push([id, solution[ind + 2]]);
-				}
+			// if (solution[0] === "-") {
+			// 	props.showAlert(
+			// 		"Could not find the solution to the given puzzle",
+			// 		"primary",
+			// 		1
+			// 	);
 
-				console.log(data);
+			// 	setDisableClear(0);
+			// 	props.setGoToBoard(true);
+			// 	props.setGoToAbout(true);
+			// 	props.setGoToHome(true);
+			// } else {
+			// 	let visitedInOrder = [];
+			// 	for (let ind = 0; ind < solution.length; ind += 5) {
+			// 		let id = parseInt(solution[ind] + "" + solution[ind + 1]);
+			// 		visitedInOrder.push([id, solution[ind + 2]]);
+			// 	}
+
+			// 	console.log(data);
 	
-				props.showAlert(
-					"Puzzle is solved as follows!",
-					"success",
-					1
-				);
+			// 	props.showAlert(
+			// 		"Puzzle is solved as follows!",
+			// 		"success",
+			// 		1
+			// 	);
 	
-				setTimeout(() => {
-					props.showAlert(
-						"Click on Clear to clear the board!",
-						"primary",
-						0
-					);
-				}, 3000);
+			// 	setTimeout(() => {
+			// 		props.showAlert(
+			// 			"Click on Clear to clear the board!",
+			// 			"primary",
+			// 			0
+			// 		);
+			// 	}, 3000);
 	
-				// Display the solution if it exists
-				for (let i = 0; i < visitedInOrder.length; i++) {
-					setTimeout(() => {
-						if (colorElements[visitedInOrder[i][0]] != null) {
-							colorElements[visitedInOrder[i][0]].current.style.backgroundColor = `${colorCodeToColor.get(visitedInOrder[i][1])}`;
-						}
-					}, tracePathDelay * (i + 1))
-				}
+			// 	// Display the solution if it exists
+			// 	for (let i = 0; i < visitedInOrder.length; i++) {
+			// 		setTimeout(() => {
+			// 			if (colorElements[visitedInOrder[i][0]] != null) {
+			// 				colorElements[visitedInOrder[i][0]].current.style.backgroundColor = `${colorCodeToColor.get(visitedInOrder[i][1])}`;
+			// 			}
+			// 		}, tracePathDelay * (i + 1))
+			// 	}
 	
-				setTimeout(() => {
-					setDisableClear(0);
-					props.setGoToBoard(true);
-					props.setGoToAbout(true);
-					props.setGoToHome(true);
-				}, tracePathDelay * (size * size))
-			}
+			// 	setTimeout(() => {
+			// 		setDisableClear(0);
+			// 		props.setGoToBoard(true);
+			// 		props.setGoToAbout(true);
+			// 		props.setGoToHome(true);
+			// 	}, tracePathDelay * (size * size))
+			// }
 		}).catch((err) => {
 			setTimeout(() => {
 				props.showAlert(

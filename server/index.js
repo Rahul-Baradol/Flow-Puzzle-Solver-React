@@ -17,7 +17,9 @@ app.post('/', (req, res) => {
 
     let child = execFile("././a.out", (error, stdout, stderr) => {
       res.json({
-        solution: stdout
+        error: error,
+        solution: stdout,
+        stderr: stderr
       })
     })
 
