@@ -34,7 +34,7 @@ export default function About(props) {
           <div className="card-body customCard">
             <h5 className="card-title">About Me!</h5>
             <p className="card-text">Check out my portfolio website to know more about me!</p>
-            <a href="https://rahulbaradol.vercel.app/" rel="noreferrer" target="_blank" className="btn btn-primary customButton">Checkout my portfolio</a>
+            <a href="https://rahulbaradol.in/" rel="noreferrer" target="_blank" className="btn btn-primary customButton">Checkout my portfolio</a>
           </div>
         </div>
       </div>
